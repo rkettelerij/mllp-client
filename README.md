@@ -20,13 +20,13 @@ Example
 Send file to localhost:2575
 
 ```
-./mllp-client -file /Users/rickette/adt_a01_example.txt
+./mllp-client -file /mllp-client/src/adt_a01.txt
 ```
 
 Send file to messagebroker.example.com on port 7890
 
 ```
-./mllp-client -file /Users/rickette/adt_a01_example.txt -host messagebroker.example.com -port 7890
+./mllp-client -file /mllp-client/src/adt_a01.txt -host messagebroker.example.com -port 7890
 ```
 
 Building
