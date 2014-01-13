@@ -1,14 +1,13 @@
 Golang MLLP client
 ==================
 
-Simple CLI tool written in [Go](http://golang.org) to send messages over [MLLP](http://en.wikipedia.org/wiki/Health_Level_7#MLLP) (Minimal Lower Layer Protocol)
-to servers. MLLP is widely used in healthcare for amongst others HL7 messaging.
+Simple CLI tool written in [Go](http://golang.org) to send messages over [MLLP](http://en.wikipedia.org/wiki/Health_Level_7#MLLP) (Minimal Lower Layer Protocol). MLLP is widely used in healthcare for amongst others HL7 messaging.
 
 Usage
 -----
 
 ```
-Usage of mllp_client:
+Usage of mllp-client:
   -file="<filename>": path to file which contents will be send to the MLLP server
   -host="localhost": hostname of MLLP server, default value is localhost
   -port=2575: portnumber of MLLP server, default value is 2575
@@ -44,6 +43,7 @@ goxc -bc "linux, windows, darwin"
 License
 -------
 
+```
 The MIT License (MIT)
 
 Copyright (c) 2014 Richard Kettelerij
@@ -65,3 +65,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+```
