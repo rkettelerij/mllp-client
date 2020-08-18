@@ -3,32 +3,46 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net"
 	"os"
-	"io/ioutil"
 )
 
 const (
-	empty_filename = "<filename>"
-	mllp_start = 0x0b
-	mllp_end1  = 0x1c
-	mllp_end2  = 0x0d
+	emptyFilename  = "<filename>"
+	emptyDirectory = "<empty_dir>"
+	mllpStart      = 0x0b
+	mllpEnd        = 0x1c
+	mllpEnd2       = 0x0d
 )
 
 func main() {
 	host := flag.String("host", "localhost", "hostname of MLLP server, default value is localhost")
 	port := flag.Int("port", 2575, "portnumber of MLLP server, default value is 2575")
-	file := flag.String("file", empty_filename, "path to file which contents will be send to the MLLP server")
+	file := flag.String("file", emptyFilename, "path to file which contents will be send to the MLLP server")
+	dir := flag.String("dir", emptyDirectory, "path to file which contents will be send to the MLLP server")
 	flag.Parse()
 
+	d := *dir
 	f := *file
-	if f == empty_filename {
-		fmt.Println("'file' argument is required")
+
+	if d == emptyDirectory && f == emptyFilename {
+		fmt.Println("A file or directory must be provided. Exiting.")
 		os.Exit(1)
 	}
-	Send(file, host, port)
+
+	if f != emptyFilename {
+		Send(file, host, port)
+	}
+
+	if d != emptyDirectory {
+		SendDir(dir, host, port)
+	}
+
 }
 
+//Send sends a file over MLLP
 func Send(file *string, host *string, port *int) {
 	fmt.Printf("Sending message in file %s over MLLP to %s:%d\n", *file, *host, *port)
 
@@ -41,10 +55,10 @@ func Send(file *string, host *string, port *int) {
 	defer conn.Close()
 
 	// write the actual message
-	conn.Write([]byte { mllp_start })
+	conn.Write([]byte{mllpStart})
 	fmt.Fprintf(conn, readfile(file))
-	conn.Write([]byte { mllp_end1 })
-	conn.Write([]byte { mllp_end2 })
+	conn.Write([]byte{mllpEnd})
+	conn.Write([]byte{mllpEnd2})
 
 	// read response
 	reply := make([]byte, 1024)
@@ -64,4 +78,17 @@ func readfile(file *string) string {
 		os.Exit(1)
 	}
 	return string(content)
+}
+
+// SendDir sends all files in a directory over MLLP
+func SendDir(dir *string, host *string, port *int) {
+	files, err := ioutil.ReadDir(*dir)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, f := range files {
+		file := fmt.Sprintf("%s/%s", *dir, f.Name())
+		Send(&file, host, port)
+	}
+
 }

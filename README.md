@@ -9,6 +9,7 @@ Usage
 ```
 Usage of mllp-client:
   -file="<filename>": path to file which contents will be send to the MLLP server
+  -dir="<directory>": path to directory which will have all files within it sent to the MLLP server
   -host="localhost": hostname of MLLP server, default value is localhost
   -port=2575: portnumber of MLLP server, default value is 2575
 ```
@@ -21,6 +22,11 @@ Send file to localhost:2575
 ```
 ./mllp-client -file /mllp-client/src/adt_a01.txt
 ```
+
+Send all files in a directory to localhost:2575
+
+```
+./mllp-client -dir /mllp-client/src/hl7_files/
 
 Send file to messagebroker.example.com on port 7890
 
