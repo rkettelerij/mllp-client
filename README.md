@@ -27,6 +27,7 @@ Send all files in a directory to localhost:2575
 
 ```
 ./mllp-client -dir /mllp-client/src/hl7_files/
+```
 
 Send file to messagebroker.example.com on port 7890
 
