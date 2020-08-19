@@ -19,8 +19,8 @@ const (
 
 func main() {
 	host := flag.String("host", "localhost", "hostname of MLLP server, default value is localhost")
-	port := flag.Int("port", 2575, "portnumber of MLLP server, default value is 2575")
-	file := flag.String("file", emptyFilename, "path to file which contents will be send to the MLLP server")
+	port := flag.Int("port", 2575, "port number of MLLP server, default value is 2575")
+	file := flag.String("file", emptyFilename, "path to file whose contents will be sent to the MLLP server")
 	dir := flag.String("dir", emptyDirectory, "path to directory where all files within it will be sent to the MLLP server")
 	flag.Parse()
 
